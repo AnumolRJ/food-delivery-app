@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import Navigators from "./src/navigators";
+import { useFonts } from "expo-font";
+import Fonts from "./src/constants/Fonts";   
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [fontsLoaded] = useFonts({
+    [Fonts.POPPINS_BLACK]: require("./src/assets/fonts/Poppins-Black.ttf"),
+    [Fonts.POPPINS_BOLD]: require("./src/assets/fonts/Poppins-Bold.ttf"),
+    [Fonts.POPPINS_EXTRA_BOLD]: require("./src/assets/fonts/Poppins-ExtraBold.ttf"),
+    [Fonts.POPPINS_EXTRA_LIGHT]: require("./src/assets/fonts/Poppins-ExtraLight.ttf"),
+    [Fonts.POPPINS_LIGHT]: require("./src/assets/fonts/Poppins-Light.ttf"),
+    [Fonts.POPPINS_MEDIUM]: require("./src/assets/fonts/Poppins-Medium.ttf"),
+    [Fonts.POPPINS_REGULAR]: require("./src/assets/fonts/Poppins-Regular.ttf"),
+    [Fonts.POPPINS_SEMI_BOLD]: require("./src/assets/fonts/Poppins-SemiBold.ttf"),
+    [Fonts.POPPINS_THIN]: require("./src/assets/fonts/Poppins-Thin.ttf"),
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  if (!fontsLoaded) {
+    return null; // keep splash screen until fonts are ready
+  }
+
+  return <Navigators />;
+}
